@@ -25,6 +25,8 @@ build:
     ident: '@build.ident@'
 
 spring:
+    application:
+        name: rundeck
     main:
         banner-mode: "off"
     groovy:
@@ -135,7 +137,8 @@ grails:
 endpoints:
     jmx:
         unique-names: true
-
+    refresh:
+        enabled: true
 ---
 
 rdeck:

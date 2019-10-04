@@ -16,6 +16,7 @@
 
 
 import com.dtolabs.rundeck.app.api.ApiMarshallerRegistrar
+import com.dtolabs.rundeck.app.config.RundeckConfig
 import com.dtolabs.rundeck.app.internal.framework.FrameworkPropertyLookupFactory
 import com.dtolabs.rundeck.app.internal.framework.RundeckFrameworkFactory
 import com.dtolabs.rundeck.core.Constants
@@ -548,4 +549,5 @@ beans={
             grailsApplication = grailsApplication
         }
     }
+    rundeckConfig(RundeckConfig)
 }
