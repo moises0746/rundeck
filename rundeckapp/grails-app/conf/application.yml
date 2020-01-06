@@ -38,6 +38,8 @@ endpoints:
     enabled: true
     jmx:
         enabled: true
+    health:
+        sensitive: false
 
 ---
 grails:
