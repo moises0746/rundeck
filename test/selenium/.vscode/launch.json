@@ -12,6 +12,7 @@
             "runtimeExecutable": "bin/deck",
             "runtimeArgs": ["selenium", "--debug"],
             "outputCapture": "std",
+            "console": "integratedTerminal",
             "timeout": 20000,
             "port": 9229
         },
