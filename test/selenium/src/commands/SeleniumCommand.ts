@@ -66,7 +66,7 @@ class SeleniumCommand {
         else
             args = `node ./node_modules/.bin/jest --testPathPattern="__tests__\/selenium\/" ${opts.jest}`
 
-        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), opts.url)
+        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), {baseUri: opts.url})
 
         await waitForRundeckReady(client)
 

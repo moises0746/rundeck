@@ -42,7 +42,7 @@ class ProjectExportCommand {
     async handler(opts: Opts) {
         const fullRepoPath = Path.resolve(opts.repo)
 
-        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), opts.url)
+        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), {baseUri: opts.url})
 
         const exporter = new ProjectExporter(opts.repo, opts.project, client)
 

@@ -5,7 +5,8 @@ import {promisify} from 'util'
 import {S3} from 'aws-sdk'
 
 import {WebDriver} from 'selenium-webdriver'
-import { generateUuid } from 'ms-rest-js';
+
+import {v1} from 'uuid'
 
 const writeAsync = promisify(FS.writeFile)
 
@@ -18,7 +19,7 @@ export class Context {
 
     constructor(readonly driver: WebDriver, readonly baseUrl: string, readonly s3Upload: boolean, readonly s3Base: string) {
         this.s3 = new S3({region: 'us-west-2'})
-        this.contextId = generateUuid().slice(0,4)
+        this.contextId = v1().slice(0,4)
     }
 
     urlFor(path: string) {

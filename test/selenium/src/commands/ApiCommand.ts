@@ -70,7 +70,7 @@ class ApiCommand {
         else
             args = `node ./node_modules/.bin/jest --testPathPattern="__tests__\/api\/${opts.testPath}" ${opts.jest}`
 
-        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), opts.url)
+        const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), {baseUri: opts.url})
 
         await waitForRundeckReady(client)
 
