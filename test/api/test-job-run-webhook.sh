@@ -127,11 +127,13 @@ startnc(){
     if [ "Darwin" = "$osname" ] ; then
       nccmd="nc -4 -w 30 -l $port"
     fi
-    echo -n "HTTP/1.1 200 OK\r\n\r\n" | $nccmd > $file || fail "Unable to run netcat on port $port"
+    echo -n "HTTP/1.1 200 OK\r\n\r\n" | $nccmd > $file &
 }
 
-startnc $PORT $DIR/nc.out &
+startnc $PORT $DIR/nc.out
 ncpid=$!
+
+trap "ps -p $ncpid >/dev/null && kill $ncpid" EXIT
 
 ###
 # Run the chosen id, expect success message
@@ -164,8 +166,8 @@ fi
 
 #wait for nc to finish, should close after RunDeck server reads response
 #check if pid has finished after 5 secs
-sleep 5
-ps -p $ncpid >/dev/null && kill $ncpid
+# sleep 5
+# ps -p $ncpid >/dev/null && kill $ncpid
 
 ####
 # Verify the webhook data

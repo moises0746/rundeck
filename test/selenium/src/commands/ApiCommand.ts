@@ -12,11 +12,12 @@ interface Opts {
     headless: boolean
     s3Upload: boolean
     s3Base: string
+    testPath: string
 }
 
-class SeleniumCommand {
-    command = "selenium"
-    describe = "Run selenium test suite"
+class ApiCommand {
+    command = "api"
+    describe = "Run api test suite"
 
     builder(yargs: Argv) {
         return yargs
@@ -30,6 +31,9 @@ class SeleniumCommand {
                 describe: "Jest args",
                 type: 'string',
                 default: ''
+            })
+            .option('testPath', {
+                type: 'string'
             })
             .option("s", {
                 alias: "suite",
@@ -62,9 +66,9 @@ class SeleniumCommand {
     async handler(opts: Opts) {
         let args: string
         if (opts.debug)
-            args = `node --inspect-brk ./node_modules/.bin/jest --testPathPattern="__tests__\/selenium\/" --runInBand ${opts.jest}`
+            args = `node --inspect-brk ./node_modules/.bin/jest --runInBand --testPathPattern="__tests__\/api\/" ${opts.jest}`
         else
-            args = `node ./node_modules/.bin/jest --testPathPattern="__tests__\/selenium\/" ${opts.jest}`
+            args = `node ./node_modules/.bin/jest --testPathPattern="__tests__\/api\/${opts.testPath}" ${opts.jest}`
 
         const client = new Rundeck(new PasswordCredentialProvider(opts.url, 'admin', 'admin'), opts.url)
 
@@ -101,4 +105,4 @@ async function waitForRundeckReady(client: Rundeck, timeout = 120000) {
     throw new Error('Timeout exceeded waiting for Rundeck to be ready.')
 }
 
-module.exports = new SeleniumCommand()
+module.exports = new ApiCommand()

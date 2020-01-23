@@ -11,7 +11,7 @@ const opts = new Options()
 
 jest.setTimeout(60000)
 
-const envOpts = {
+export const envOpts = {
     RUNDECK_URL: process.env.RUNDECK_URL || 'http://127.0.0.1:4440',
     CI: ParseBool(process.env.CI),
     HEADLESS: ParseBool(process.env.HEADLESS) || ParseBool(process.env.CI),
