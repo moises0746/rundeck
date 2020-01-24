@@ -74,6 +74,20 @@ class ApiCommand {
 
         await waitForRundeckReady(client)
 
+        const projects = await client.projectList()
+
+        const testProjectPrefixes = ['project-', 'APITest', 'scheduler-', 'testscm']
+
+        const testProjects = projects.filter(project => {
+            testProjectPrefixes.some(prefix => {
+                return project.name.startsWith(prefix)
+            })
+        })
+
+        const cleanupProms = testProjects.map(p => client.projectDelete(p.name))
+
+        await Promise.all(cleanupProms)
+
         const importer = new ProjectImporter('./lib', 'SeleniumBasic', client)
         await importer.importProject()
 

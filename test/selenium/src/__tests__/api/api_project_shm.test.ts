@@ -6,5 +6,5 @@ import {ShimApiTests} from 'util/apiShim'
 import {envOpts} from 'test/selenium'
 
 describe('API Project Tests', ()=> {
-    ShimApiTests('test-project')
+    ShimApiTests(/^test-project/)
 })
